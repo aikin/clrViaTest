@@ -13,14 +13,14 @@ namespace BanKai.Basic
         [Fact]
         public void should_capture_outer_variable()
         {
-            int variableDeclaredOutsideAnonymousMethod = 1;
+            var variableDeclaredOutsideAnonymousMethod = 1;
 
             Func<int> methodCapturingVariable = () => variableDeclaredOutsideAnonymousMethod;
 
-            int returnedValue = methodCapturingVariable();
+            var returnedValue = methodCapturingVariable();
 
             // change variable value to correct test.
-            const int expectedReturnedValue = default(int);
+            const int expectedReturnedValue = 1;
 
             Assert.Equal(expectedReturnedValue, returnedValue);
         }
@@ -28,13 +28,13 @@ namespace BanKai.Basic
         [Fact]
         public void should_modify_outer_variable()
         {
-            int outerVariable = 1;
+            var outerVariable = 1;
 
             Action methodChangeVariableValue = () => outerVariable += 1;
             methodChangeVariableValue();
 
             // change variable value to correct test.
-            const int expectedOuterVariableValue = 1;
+            const int expectedOuterVariableValue = 2;
 
             Assert.Equal(expectedOuterVariableValue, outerVariable); 
         }
@@ -44,18 +44,18 @@ namespace BanKai.Basic
         {
             var functionList = new List<Func<int>>();
 
-            for (int i = 0; i < 3; ++i)
+            for (var i = 0; i < 3; ++i)
             {
                 functionList.Add(() => i);
             }
 
-            int sum = 0;
-            foreach (Func<int> func in functionList)
+            var sum = 0;
+            foreach (var func in functionList)
             {
                 sum += func();
             }
 
-            const int expectedSum = 3;
+            const int expectedSum = 9;
 
             Assert.Equal(expectedSum, sum);
         }
