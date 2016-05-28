@@ -27,10 +27,10 @@ namespace BanKai.Basic
 
             var compilerResults = SimpleCSharpCompiler.CompileWithoutRun(shortProgram);
 
-            bool containsSyntaxError = compilerResults.Errors.Count > 0;
+            var containsSyntaxError = compilerResults.Errors.Count > 0;
 
             // change the variable value to fix the test.            
-            const bool expectedContainsSyntaxError = false;
+            const bool expectedContainsSyntaxError = true;
 
             Assert.Equal(expectedContainsSyntaxError, containsSyntaxError);
             Assert.Equal(
@@ -41,12 +41,12 @@ namespace BanKai.Basic
         [Fact]
         public void should_be_clear_that_a_nullable_type_is_a_value_type()
         {
-            Type nullableType = typeof(Nullable<int>);
+            var nullableType = typeof(int?);
 
-            bool isValueType = nullableType.IsValueType;
+            var isValueType = nullableType.IsValueType;
 
             // change the variable value to fix the test.            
-            const bool expectedIsValueType = false;
+            const bool expectedIsValueType = true;
 
             Assert.Equal(expectedIsValueType, isValueType);
         }
@@ -57,7 +57,7 @@ namespace BanKai.Basic
             Nullable<int> nullableInt = null;
 
             // change the variable value to fix the test.
-            const bool expectedEquals = false;
+            const bool expectedEquals = true;
 
             Assert.Equal(expectedEquals, nullableInt == null);
         }
@@ -68,7 +68,7 @@ namespace BanKai.Basic
             int? nullableInt = null;
 
             // change the variable value to fix the test.
-            const bool expectedEquals = false;
+            const bool expectedEquals = true;
 
             Assert.Equal(expectedEquals, nullableInt == null);
         }
@@ -79,12 +79,12 @@ namespace BanKai.Basic
             int? nullableIntWithoutValue = null;
             int? nullableIntWithValue = 2;
 
-            bool hasValueForWithoutValue = nullableIntWithoutValue.HasValue;
-            bool hasValueForWithValue = nullableIntWithValue.HasValue;
+            var hasValueForWithoutValue = nullableIntWithoutValue.HasValue;
+            var hasValueForWithValue = nullableIntWithValue.HasValue;
 
             // change the variable values for the following 2 lines to fix test.
-            const bool expectedHasValueForWithoutValue = true;
-            const bool expectedHasValueForWithValue = false;
+            const bool expectedHasValueForWithoutValue = false;
+            const bool expectedHasValueForWithValue = true;
             
             Assert.Equal(expectedHasValueForWithoutValue, hasValueForWithoutValue);
             Assert.Equal(expectedHasValueForWithValue, hasValueForWithValue);
@@ -98,10 +98,10 @@ namespace BanKai.Basic
             Action useValueWithoutChecking =
                 () => nullableIntWithoutValue.Value.ToString(CultureInfo.InvariantCulture);
 
-            Exception unhandledException = useValueWithoutChecking.RunAndGetUnhandledException();
+            var unhandledException = useValueWithoutChecking.RunAndGetUnhandledException();
 
             // change the variable value to fix the test.
-            Type expectedExceptionType = typeof(Exception);
+            var expectedExceptionType = typeof(InvalidOperationException);
 
             Assert.IsType(expectedExceptionType, unhandledException);
         }
@@ -113,7 +113,7 @@ namespace BanKai.Basic
             var valueForNullableInstance = (int) nullableIntWithValue;
 
             // change the variable value to fix the test.
-            const int expectedValue = default(int);
+            const int expectedValue = 2;
 
             Assert.Equal(expectedValue, valueForNullableInstance);
         }
@@ -125,7 +125,7 @@ namespace BanKai.Basic
             int? smaller = 1;
 
             // change the variable value to fix the test.
-            const bool expectedCompareResult = false;
+            const bool expectedCompareResult = true;
 
             Assert.Equal(expectedCompareResult, larger > smaller);
         }
@@ -134,9 +134,9 @@ namespace BanKai.Basic
         public void should_returns_false_if_one_of_the_nullable_instance_has_no_value_when_doing_operator_lifting()
         {
             // change the variable values for the following 4 lines to fix the test.
-            const bool expectedResultFor5IsLargerThanNull = true;
-            const bool expectedResultFor5IsSmallerThanNull = true;
-            const bool expectedResultForNullIsLargerThanNull = true;
+            const bool expectedResultFor5IsLargerThanNull = false;
+            const bool expectedResultFor5IsSmallerThanNull = false;
+            const bool expectedResultForNullIsLargerThanNull = false;
 
             Assert.Equal(expectedResultFor5IsLargerThanNull, (int?) 5 > (int?) null);
             Assert.Equal(expectedResultFor5IsSmallerThanNull, (int?) 5 < (int?) null);
@@ -147,11 +147,11 @@ namespace BanKai.Basic
         public void should_tell_equlity_for_nullable_types()
         {
             // change the variable values for the following 2 lines to fix the test.
-            const bool expectedResultForNullToNull = false;
-            const bool expectedResultFor5To5 = false;
+            const bool expectedResultForNullToNull = true;
+            const bool expectedResultFor5To5 = true;
 
             Assert.Equal(expectedResultForNullToNull, (int?) null == (int?) null);
-            Assert.Equal(expectedResultFor5To5, (int?) 5 == (int?) 5);
+            Assert.Equal(expectedResultFor5To5, 5 as int? == 5 as int?);
         }
     }
 
