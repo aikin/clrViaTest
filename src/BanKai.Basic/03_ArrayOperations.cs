@@ -10,7 +10,7 @@ namespace BanKai.Basic
         public void should_access_certain_element_by_position()
         {
             var array = new[] {'a', 'e', 'i', 'o', 'u'};
-            char elementAtIndex2 = array[2];
+            var elementAtIndex2 = array[2];
 
             // change "default(char)" to correct value.
             const char expectedResult = default (char);
@@ -24,7 +24,7 @@ namespace BanKai.Basic
             var array = new[] { 'a', 'e', 'i', 'o', 'u' };
 
             // change "typeof(FormatException)" to correct value.
-            Type expectedExceptionType = typeof(FormatException);
+            var expectedExceptionType = typeof(FormatException);
             
             Assert.NotEqual(typeof(ArgumentException), expectedExceptionType);
             Assert.NotEqual(typeof(SystemException), expectedExceptionType);
@@ -37,7 +37,7 @@ namespace BanKai.Basic
         public void should_return_index_number_if_found()
         {
             var array = new[] { 'a', 'e', 'i', 'o', 'u' };
-            int indexOfCharacterO = Array.IndexOf(array, 'o');
+            var indexOfCharacterO = Array.IndexOf(array, 'o');
 
             // change "default(char)" to correct value.
             const int expectedResult = default(char);
