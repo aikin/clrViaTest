@@ -22,10 +22,7 @@
             m_y = y;
         }
 
-        public string WhereAmI
-        {
-            get { return string.Format("You are at ({0}, {1})", m_x, m_y); }
-        }
+        public string WhereAmI => $"You are at ({m_x}, {m_y})";
 
         public string Talk()
         {

@@ -4,23 +4,14 @@
 
     internal abstract class BaseKeywordDemoClassBase
     {
-        protected string Ending
-        {
-            get { return "."; }
-        }
+        protected string Ending => ".";
 
-        public virtual string Name
-        {
-            get { return "BaseClass"; }
-        }
+        public virtual string Name => "BaseClass";
     }
 
     internal class BaseKeywordDemoClass : BaseKeywordDemoClassBase
     {
-        public override string Name
-        {
-            get { return base.Name + "'s derived class" + base.Ending; }
-        }
+        public override string Name => base.Name + "'s derived class" + base.Ending;
     }
 
     // ReSharper restore RedundantBaseQualifier

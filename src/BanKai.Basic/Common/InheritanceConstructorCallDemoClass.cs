@@ -6,10 +6,7 @@ namespace BanKai.Basic.Common
     {
         protected readonly StringBuilder m_messageBuffer = new StringBuilder();
 
-        public string ConstructorCallMessage
-        {
-            get { return m_messageBuffer.ToString(); }
-        }
+        public string ConstructorCallMessage => m_messageBuffer.ToString();
 
         protected InheritanceConstructorCallDemoClassBase()
         {
