@@ -12,7 +12,7 @@ namespace BanKai.Basic.Common
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
 
                 m_event += value;
@@ -25,10 +25,7 @@ namespace BanKai.Basic.Common
         private void OnTiggered()
         {
             var handler = m_event;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         public void Tigger()

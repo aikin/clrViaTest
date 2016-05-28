@@ -13,11 +13,8 @@ namespace BanKai.Basic.Common
 
         private void OnTriggerEvent()
         {
-            EventHandler handler = Event;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            var handler = Event;
+            handler?.Invoke(this, EventArgs.Empty);
         }
     }
 }

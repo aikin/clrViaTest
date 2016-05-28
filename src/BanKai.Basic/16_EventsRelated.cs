@@ -22,7 +22,7 @@ namespace BanKai.Basic
             demoObject.TriggerEvent();
 
             // change the variable value to fix the test.
-            const bool expectedIsEventCalled = false;
+            const bool expectedIsEventCalled = true;
 
             Assert.Equal(expectedIsEventCalled, eventIsCalled);
         }
@@ -44,7 +44,7 @@ namespace BanKai.Basic
             demoObject.TriggerEvent();
 
             // change the variable value to fix the test.
-            const bool expectedIsEventCalled = true;
+            const bool expectedIsEventCalled = false;
 
             Assert.Equal(expectedIsEventCalled, eventIsCalled);
         }
@@ -53,7 +53,7 @@ namespace BanKai.Basic
         public void should_be_able_to_customize_event_args()
         {
             var demoObject = new CustomizeEventArgsDemoClass();
-            string greetingContent = string.Empty;
+            var greetingContent = string.Empty;
 
             EventHandler<GreetingEventArgs> eventHandler = (sender, eventArgs) =>
             {
@@ -65,7 +65,7 @@ namespace BanKai.Basic
             demoObject.Greet("World");
 
             // change the variable value to fix the test.
-            const string expectedContent = "";
+            const string expectedContent = "Hello World";
 
             Assert.Equal(expectedContent, greetingContent);
         }
@@ -76,7 +76,7 @@ namespace BanKai.Basic
             var demoObject = new CustomizeEventAccessorDemoClass();
 
             // change the variable value to fix the test.
-            var expectedExceptionType = typeof(Exception);
+            var expectedExceptionType = typeof(ArgumentNullException);
 
             Assert.Throws(expectedExceptionType, () => demoObject.Event += null);
         }

@@ -13,11 +13,8 @@ namespace BanKai.Basic.Common
 
         private void OnGreeting(string content)
         {
-            EventHandler<GreetingEventArgs> handler = Greeting;
-            if (handler != null)
-            {
-                handler(this, new GreetingEventArgs(content));
-            }
+            var handler = Greeting;
+            handler?.Invoke(this, new GreetingEventArgs(content));
         }
     }
 
