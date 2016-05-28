@@ -16,9 +16,6 @@ namespace BanKai.Basic.Common
             m_trace.Add("MulticastDelegateDemoClass.AnotherMethod() called");
         }
 
-        public string[] Trace
-        {
-            get { return m_trace.ToArray(); }
-        }
+        public string[] Trace => m_trace.ToArray();
     }
 }

@@ -30,7 +30,7 @@ namespace BanKai.Basic
             TransformerDelegateDemo transformer = EquivalentTransformation;
 
             // change variable value to fix test.
-            const string expectedDelegateType = "";
+            const string expectedDelegateType = "TransformerDelegateDemo";
 
             Assert.Equal(expectedDelegateType, typeof(TransformerDelegateDemo).Name);
             Assert.True(transformer is Delegate);
@@ -41,10 +41,10 @@ namespace BanKai.Basic
         {
             TransformerDelegateDemo transformer = EquivalentTransformation;
 
-            int transformResult = transformer(2);
+            var transformResult = transformer(2);
 
             // change variable value to fix test.
-            const int expectedResult = default(int);
+            const int expectedResult = 2;
 
             Assert.Equal(expectedResult, transformResult);
         }
@@ -54,10 +54,10 @@ namespace BanKai.Basic
         {
             TransformerDelegateDemo transformer = DoubleTransformation;
 
-            int actualResult = PassingDelegateAsArgument(transformer);
+            var actualResult = PassingDelegateAsArgument(transformer);
 
             // change variable value to fix test.
-            const int expectedResult = default(int);
+            const int expectedResult = 5;
 
             Assert.Equal(expectedResult, actualResult);
         }
@@ -73,7 +73,7 @@ namespace BanKai.Basic
             theDelegate();
 
             // change variable value to fix test.
-            var expectedTrace = new string[] {};
+            var expectedTrace = new string[] { "MulticastDelegateDemoClass.OneMethod() called", "MulticastDelegateDemoClass.AnotherMethod() called" };
 
             Assert.Equal(expectedTrace, demoObject.Trace);
         }
@@ -90,7 +90,7 @@ namespace BanKai.Basic
             theDelegate();
 
             // change variable value to fix test.
-            var expectedTrace = new string[] { };
+            var expectedTrace = new string[] { "MulticastDelegateDemoClass.AnotherMethod() called" };
 
             Assert.Equal(expectedTrace, demoObject.Trace);
         }
@@ -101,12 +101,12 @@ namespace BanKai.Basic
             var demoObject = new MulticastDelegateDemoClass();
 
             Action theDelegate = demoObject.OneMethod;
-            Action copy = theDelegate;
+            var copy = theDelegate;
 
             theDelegate += demoObject.AnotherMethod;
 
             // change variable value to fix test.
-            const bool areReferenceEqual = true;
+            const bool areReferenceEqual = false;
 
             Assert.Equal(areReferenceEqual, ReferenceEquals(theDelegate, copy));
         }
@@ -123,7 +123,7 @@ namespace BanKai.Basic
             ((a + b + c) - (a + c))();
 
             // change variable value to fix test.
-            const string expectedOutput = "B";
+            const string expectedOutput = "A,B,C";
 
             Assert.Equal(expectedOutput, demoObject.ToString());
         }
@@ -137,10 +137,10 @@ namespace BanKai.Basic
             Func<int> returnsTwo = demoObject.ReturnsTwo;
             Func<int> returnsThree = demoObject.ReturnsThree;
 
-            int returnedResult = (returnsOne + returnsThree + returnsTwo)();
+            var returnedResult = (returnsOne + returnsThree + returnsTwo)();
 
             // change variable value to fix test.
-            const int expectedResult = 6;
+            const int expectedResult = 2;
 
             Assert.Equal(expectedResult, returnedResult);
         }
@@ -152,10 +152,10 @@ namespace BanKai.Basic
 
             Func<object> delegateReturnsObject = demoObject.ReturnsMoreSpecificType;
 
-            object returnedValue = delegateReturnsObject();
+            var returnedValue = delegateReturnsObject();
 
             // change variable value to fix test.
-            object expectedValue = null;
+            object expectedValue = "Hello";
 
             Assert.Equal(expectedValue, returnedValue);
         }
@@ -168,10 +168,10 @@ namespace BanKai.Basic
             Func<object, string> delegateAcceptsObject = demoObject.InputMoreGeneralType;
             Func<string, string> delegateAcceptsString = delegateAcceptsObject;
 
-            string returnedValue = delegateAcceptsString("Good");
+            var returnedValue = delegateAcceptsString("Good");
 
             // change variable value to fix test.
-            const string expectedValue = "";
+            const string expectedValue = "Good";
 
             Assert.Equal(expectedValue, returnedValue);
         }
