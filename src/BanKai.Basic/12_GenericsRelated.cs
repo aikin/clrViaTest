@@ -12,10 +12,10 @@ namespace BanKai.Basic
         {
             var genericObjectWithStringAsTypeArgument = new BasicGenericDemoClass<string>();
 
-            Type valuePropertyType = genericObjectWithStringAsTypeArgument.GetPropertyType("Value");
+            var valuePropertyType = genericObjectWithStringAsTypeArgument.GetPropertyType("Value");
 
             // correct the variable value to fix the test
-            Type expectedValuePropertyType = typeof(object);
+            var expectedValuePropertyType = typeof(string);
 
             Assert.Equal(expectedValuePropertyType, valuePropertyType);
         }
@@ -26,7 +26,7 @@ namespace BanKai.Basic
             var demoObject = new ValueTypeRestrictedGenericDemoClass<int>();
 
             // correct the variable value to fix the test
-            const int expectedInitialValue = 1;
+            const int expectedInitialValue = 0;
 
             Assert.Equal(expectedInitialValue, demoObject.Value);
         }
@@ -37,7 +37,7 @@ namespace BanKai.Basic
             var demoObject = new RefTypeRestrictedGenericDemoClass<string>();
 
             // correct the variable value to fix the test
-            const string expectedInitialValue = "Hello";
+            const string expectedInitialValue = null;
 
             Assert.Equal(expectedInitialValue, demoObject.Value);
         }
@@ -48,7 +48,7 @@ namespace BanKai.Basic
             var demoObject = new DefaultCtorRestrictedGenericDemoClass<SayHelloByDefault>();
 
             // correct the variable value to fix the test
-            const string expectedStringValue = default(string);
+            const string expectedStringValue = "Hello";
 
             Assert.Equal(expectedStringValue, demoObject.Value.ToString());
         }
@@ -59,7 +59,7 @@ namespace BanKai.Basic
             var demoObject = new InterfaceRestrictedGenericDemoClass<Duck>();
 
             // correct the variable value to fix the test
-            const string expectedStringValue = "";
+            const string expectedStringValue = "Ga, ga, ...";
 
             Assert.Equal(expectedStringValue, demoObject.ToString());
         }
@@ -67,10 +67,10 @@ namespace BanKai.Basic
         [Fact]
         public void should_automatically_resolve_parameter_type()
         {
-            string actualReturnValue = GenericMethodDemoClass.ResolvableGenericMethod(new Duck());
+            var actualReturnValue = GenericMethodDemoClass.ResolvableGenericMethod(new Duck());
 
             // correct the variable value to fix the test
-            const string expectedReturnValue = "";
+            const string expectedReturnValue = "ResolvableGenericMethod(T) called. T is Duck";
 
             Assert.Equal(expectedReturnValue, actualReturnValue);
         }
@@ -78,10 +78,10 @@ namespace BanKai.Basic
         [Fact]
         public void should_specify_type_if_type_argument_cannot_be_resovled()
         {
-            string actualReturnValue = GenericMethodDemoClass.NotResolvableGenericMethod<string>();
+            var actualReturnValue = GenericMethodDemoClass.NotResolvableGenericMethod<string>();
 
             // correct the variable value to fix the test
-            const string expectedReturnValue = "";
+            const string expectedReturnValue = "NotResolvableGenericMethod() called. T is String";
 
             Assert.Equal(expectedReturnValue, actualReturnValue);
         }
@@ -90,7 +90,7 @@ namespace BanKai.Basic
         public void should_be_different_types_for_different_type_argument()
         {
             // correct the variable value to fix the test
-            const bool areEqual = true;
+            const bool areEqual = false;
 
             Assert.Equal(
                 areEqual,
@@ -105,8 +105,8 @@ namespace BanKai.Basic
             GenericTypeStaticDataDemoClass<int>.Count = 2;
 
             // correct the variable values for the following 2 lines to fix the test
-            const int expectedCountForIntClosedType = 0;
-            const int expectedCountForStringClosedType = 0;
+            const int expectedCountForIntClosedType = 2;
+            const int expectedCountForStringClosedType = 5;
 
             Assert.Equal(expectedCountForIntClosedType, GenericTypeStaticDataDemoClass<int>.Count);
             Assert.Equal(expectedCountForStringClosedType, GenericTypeStaticDataDemoClass<string>.Count);
@@ -117,10 +117,10 @@ namespace BanKai.Basic
         {
             var covariantDemoObject = new CovariantContravariantDemoClass<string>("Hello");
             ICovariantGetDemo<object> covariantWithBaseTypeArgument = covariantDemoObject;
-            object value = covariantWithBaseTypeArgument.Get();
+            var value = covariantWithBaseTypeArgument.Get();
 
             // correct the variable value to fix the test
-            object expectedValue = null;
+            object expectedValue = "Hello";
 
             Assert.Equal(expectedValue, value);
         }
@@ -134,7 +134,7 @@ namespace BanKai.Basic
             contravariantWithDerivedTypeArgument.Put("Hello");
 
             // correct the variable value to fix the test
-            object expectedValue = null;
+            object expectedValue = "Hello";
 
             Assert.Equal(expectedValue, contravariantDemoObject.Get());
         }
