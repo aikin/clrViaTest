@@ -17,16 +17,16 @@ namespace BanKai.Basic
         {
             var collection = new[] {1, 2, 3};
 
-            IEnumerator enumerator = collection.GetEnumerator();
+            var enumerator = collection.GetEnumerator();
             Action getCurrentValueWithoutMoveNext = () =>
             {
-                object value = enumerator.Current;
+                var value = enumerator.Current;
             };
 
-            Exception error = getCurrentValueWithoutMoveNext.RunAndGetUnhandledException();
+            var error = getCurrentValueWithoutMoveNext.RunAndGetUnhandledException();
 
             // change the variable value to fix the test.
-            Type expectedExceptionType = typeof(Exception);
+            var expectedExceptionType = typeof(InvalidOperationException);
 
             Assert.Equal(expectedExceptionType, error.GetType());
         }
@@ -36,12 +36,12 @@ namespace BanKai.Basic
         {
             var collection = new List<string> {"good", "morning"};
 
-            List<string>.Enumerator enumerator = collection.GetEnumerator();
+            var enumerator = collection.GetEnumerator();
 
-            bool notEndOfIteration = enumerator.MoveNext();
+            var notEndOfIteration = enumerator.MoveNext();
 
             // change the variable value to fix the test.
-            const bool expected = false;
+            const bool expected = true;
 
             Assert.Equal(expected, notEndOfIteration);
         }
@@ -51,14 +51,14 @@ namespace BanKai.Basic
         {
             var collection = new LinkedList<int>(new[] {1, 2, 3});
 
-            LinkedList<int>.Enumerator enumerator = collection.GetEnumerator();
+            var enumerator = collection.GetEnumerator();
 
             enumerator.MoveNext();
 
-            int currentValue = enumerator.Current;
+            var currentValue = enumerator.Current;
 
             // change the variable value to fix the test.
-            const int expectedCurrentValue = 2;
+            const int expectedCurrentValue = 1;
 
             Assert.Equal(expectedCurrentValue, currentValue);
         }
@@ -70,7 +70,7 @@ namespace BanKai.Basic
 
             var copyOfCollection = new List<int>();
 
-            using (SortedSet<int>.Enumerator enumerator = collection.GetEnumerator())
+            using (var enumerator = collection.GetEnumerator())
             {
                 while (enumerator.MoveNext())
                 {
@@ -79,7 +79,7 @@ namespace BanKai.Basic
             }
 
             // change the variable value to fix the test.
-            var expectedCopyResult = new List<int> {10, 2, 3, 5};
+            var expectedCopyResult = new List<int> {2, 3, 5, 10};
 
             Assert.Equal(expectedCopyResult, copyOfCollection);
         }
@@ -90,13 +90,13 @@ namespace BanKai.Basic
             var collection = new SortedSet<int> { 10, 2, 3, 5 };
             var copyOfCollection = new List<int>();
 
-            foreach (int valueInCollection in collection)
+            foreach (var valueInCollection in collection)
             {
                 copyOfCollection.Add(valueInCollection);
             }
 
             // change the variable value to fix the test.
-            var expectedCopyResult = new List<int> { 10, 2, 3, 5 };
+            var expectedCopyResult = new List<int> { 2, 3, 5, 10 };
 
             Assert.Equal(expectedCopyResult, copyOfCollection);
         }
@@ -107,13 +107,13 @@ namespace BanKai.Basic
             var demoObject = new ImplIteratorUsingYieldDemoClass();
             var numberStorage = new List<int>();
 
-            foreach (int number in demoObject.GetOneToTen())
+            foreach (var number in demoObject.GetOneToTen())
             {
                 numberStorage.Add(number);
             }
 
             // change the variable value to fix the test.
-            var expectedNumberStorage = new List<int> {1, 2};
+            var expectedNumberStorage = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
             Assert.Equal(expectedNumberStorage, numberStorage);
         }
@@ -124,24 +124,7 @@ namespace BanKai.Basic
             var demoObject = new ImplIteratorUsingYieldDemoClass();
             var numberStorage = new List<int>();
 
-            foreach (int number in demoObject.GetOneToThreeWithMultipleYields())
-            {
-                numberStorage.Add(number);
-            }
-
-            // change the variable value to fix the test.
-            var expectedNumberStorage = new List<int> {1};
-
-            Assert.Equal(expectedNumberStorage, numberStorage);
-        }
-
-        [Fact]
-        public void should_using_yield_break_to_stop_iterating_early()
-        {
-            var demoObject = new ImplIteratorUsingYieldDemoClass();
-            var numberStorage = new List<int>();
-
-            foreach (int number in demoObject.GetOnToThreeButBreakingAtTwo())
+            foreach (var number in demoObject.GetOneToThreeWithMultipleYields())
             {
                 numberStorage.Add(number);
             }
@@ -153,18 +136,35 @@ namespace BanKai.Basic
         }
 
         [Fact]
-        public void should_composing_iterating_sequences()
+        public void should_using_yield_break_to_stop_iterating_early()
         {
             var demoObject = new ImplIteratorUsingYieldDemoClass();
             var numberStorage = new List<int>();
 
-            foreach (int number in demoObject.GetEvenNumber(demoObject.GetOneToTen()))
+            foreach (var number in demoObject.GetOnToThreeButBreakingAtTwo())
             {
                 numberStorage.Add(number);
             }
 
             // change the variable value to fix the test.
-            var expectedNumberStorage = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            var expectedNumberStorage = new List<int> { 1, 2 };
+
+            Assert.Equal(expectedNumberStorage, numberStorage);
+        }
+
+        [Fact]
+        public void should_composing_iterating_sequences()
+        {
+            var demoObject = new ImplIteratorUsingYieldDemoClass();
+            var numberStorage = new List<int>();
+
+            foreach (var number in demoObject.GetEvenNumber(demoObject.GetOneToTen()))
+            {
+                numberStorage.Add(number);
+            }
+
+            // change the variable value to fix the test.
+            var expectedNumberStorage = new List<int> { 2, 4, 6, 8, 10 };
 
             Assert.Equal(expectedNumberStorage, numberStorage);
         }

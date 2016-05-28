@@ -10,7 +10,7 @@ namespace BanKai.Basic.Common
     {
         public IEnumerable<int> GetOneToTen()
         {
-            for (int i = 1; i <= 10; ++i)
+            for (var i = 1; i <= 10; ++i)
             {
                 yield return i;
             }
@@ -33,7 +33,7 @@ namespace BanKai.Basic.Common
 
         public IEnumerable<int> GetEvenNumber(IEnumerable<int> getOneToTen)
         {
-            foreach (int numberInCollection in getOneToTen)
+            foreach (var numberInCollection in getOneToTen)
             {
                 if (numberInCollection % 2 == 0)
                 {
