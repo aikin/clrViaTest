@@ -15,10 +15,10 @@ namespace BanKai.Basic
                 return x * 2;
             };
 
-            int transformResult = doubleTransform(2);
+            var transformResult = doubleTransform(2);
 
             // change variable value to fix test.
-            const int expectedResult = default(int);
+            const int expectedResult = 4;
 
             Assert.Equal(expectedResult, transformResult);
         }
@@ -28,10 +28,10 @@ namespace BanKai.Basic
         {
             Func<int, int> doubleTransform = x => x * 2;
 
-            int transformResult = doubleTransform(2);
+            var transformResult = doubleTransform(2);
 
             // change variable value to fix test.
-            const int expectedResult = default(int);
+            const int expectedResult = 4;
 
             Assert.Equal(expectedResult, transformResult);
         }
