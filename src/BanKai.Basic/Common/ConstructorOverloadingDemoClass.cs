@@ -17,9 +17,6 @@ namespace BanKai.Basic.Common
             m_reportBuilder.AppendLine("Ctor(string)");
         }
 
-        public string ConstructorCallSequence
-        {
-            get { return m_reportBuilder.ToString(); }
-        }
+        public string ConstructorCallSequence => m_reportBuilder.ToString();
     }
 }

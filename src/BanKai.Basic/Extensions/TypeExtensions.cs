@@ -12,7 +12,7 @@ namespace BanKai.Basic.Extensions
                 return false;
             }
 
-            Type type = instance.GetType();
+            var type = instance.GetType();
 
             const BindingFlags bindingFlags = 
                 BindingFlags.CreateInstance | 
@@ -20,7 +20,7 @@ namespace BanKai.Basic.Extensions
                 BindingFlags.Public |
                 BindingFlags.NonPublic;
 
-            ConstructorInfo constructorInfo = type.GetConstructor(
+            var constructorInfo = type.GetConstructor(
                 bindingFlags,
                 null,
                 CallingConventions.Any,
@@ -34,7 +34,7 @@ namespace BanKai.Basic.Extensions
         {
             if (instance == null)
             {
-                throw new ArgumentNullException("instance");
+                throw new ArgumentNullException(nameof(instance));
             }
 
             Type type = instance.GetType();
@@ -45,7 +45,7 @@ namespace BanKai.Basic.Extensions
                 BindingFlags.Public |
                 BindingFlags.NonPublic;
 
-            MethodInfo methodInfo = type.GetMethod(
+            var methodInfo = type.GetMethod(
                 methodName,
                 bindingFlags,
                 null,
@@ -59,10 +59,10 @@ namespace BanKai.Basic.Extensions
         {
             if (instance == null)
             {
-                throw new ArgumentNullException("instance");
+                throw new ArgumentNullException(nameof(instance));
             }
 
-            Type type = instance.GetType();
+            var type = instance.GetType();
 
             const BindingFlags bindingFlags =
                 BindingFlags.GetProperty |
@@ -70,7 +70,7 @@ namespace BanKai.Basic.Extensions
                 BindingFlags.Public |
                 BindingFlags.NonPublic;
 
-            PropertyInfo propertyInfo = type.GetProperty(propertyName, bindingFlags);
+            var propertyInfo = type.GetProperty(propertyName, bindingFlags);
 
             return propertyInfo.PropertyType;
         }
