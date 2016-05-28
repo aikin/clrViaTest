@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using BanKai.Basic.Common;
 using Xunit;
 
@@ -13,10 +12,10 @@ namespace BanKai.Basic
         {
             const string message = "Hello!";
 
-            string returnValue = message.OhGodItLooksAsIfIWasAMemberOfString();
+            var returnValue = message.OhGodItLooksAsIfIWasAMemberOfString();
 
             // please update variable value to fix the test.
-            const string expectedReturnValue = "";
+            const string expectedReturnValue = "Hello!";
 
             Assert.Equal(expectedReturnValue, returnValue);
         }
@@ -26,11 +25,11 @@ namespace BanKai.Basic
         {
             var numberList = new List<int> {1, 2, 3};
 
-            IEnumerable<string> transformedResult = 
+            var transformedResult = 
                 numberList.MySelect(number => number.ToString(CultureInfo.InvariantCulture));
 
             // please update variable value to fix the test.
-            IEnumerable<string> expectedResult = new[] {"hehe"};
+            IEnumerable<string> expectedResult = new[] {"1", "2", "3"};
 
             Assert.Equal(expectedResult, transformedResult);
         }

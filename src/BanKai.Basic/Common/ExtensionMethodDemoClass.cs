@@ -17,7 +17,7 @@ namespace BanKai.Basic.Common
             this IEnumerable<TInput> collection,
             Func<TInput, TResult> transformer)
         {
-            foreach (TInput input in collection)
+            foreach (var input in collection)
             {
                 yield return transformer(input);
             }
