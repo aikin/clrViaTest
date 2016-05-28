@@ -37,7 +37,7 @@ namespace BanKai.Basic.Extensions
                 throw new ArgumentNullException(nameof(instance));
             }
 
-            Type type = instance.GetType();
+            var type = instance.GetType();
 
             const BindingFlags bindingFlags =
                 BindingFlags.InvokeMethod |
